@@ -107,25 +107,7 @@ class RedisShardingAPI(object):
         return f(*args, **kwargs)
         
     def __getattr__(self, method):
-        if method in [
-            "get", "set", "getset",
-            "incr", "decr", "exists",
-            "delete", "get_type", "rename",
-            "expire", "ttl", "push",
-            "llen", "lrange", "ltrim",
-            "lindex", "pop", "lset",
-            "lrem", "sadd", "srem", 
-            "sismember", "smembers", 
-            "zadd", "zrem", "zincr",
-            "zrange", "zrevrange", "zrangebyscore",
-            "zremrangebyscore", "zcard", "zscore", 
-            "hget", "hset", "hdel", "hincrby", "hlen", 
-            "hkeys", "hvals", "hgetall", "hexists", "hmget", "hmset", 
-            "publish",
-            ]:
-            return functools.partial(self.__wrap, method)
-        else:
-            raise NotImplementedError("method '%s' cannot be sharded" % method)
+        return functools.partial(self.__wrap, method)
 
     @defer.inlineCallbacks
     def mget(self, keys, *args):
