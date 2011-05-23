@@ -82,7 +82,7 @@ class RedisShardingAPI(object):
         for conn in self.__ring.nodes:
             yield conn.disconnect()
         defer.returnValue(True)
-        
+
     def __makering(self, results):
         connections = map(operator.itemgetter(1), results)
         self.__ring = HashRing(connections)
@@ -105,7 +105,7 @@ class RedisShardingAPI(object):
         #print "node for '%s' is: %s" % (key, node)
         f = getattr(node, method)
         return f(*args, **kwargs)
-        
+
     def __getattr__(self, method):
         return functools.partial(self.__wrap, method)
 

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding: utf-8
 #
 # Copyright 2010 Alexandre Fiori
@@ -169,7 +168,7 @@ class Locale(object):
         _ = self.translate
         self._months = [
             _("January"), _("February"), _("March"), _("April"),
-            _("May"), _("June"), _("July"), _("August"), 
+            _("May"), _("June"), _("July"), _("August"),
             _("September"), _("October"), _("November"), _("December")]
         self._weekdays = [
             _("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"),
@@ -182,13 +181,10 @@ class Locale(object):
         plural_message when count != 1, and we return the singular form
         for the given message when count == 1.
         """
-        if plural_message is not None:
-            if count is not None:
-                return self.translator.ngettext(message, plural_message, count)
-            else:
-                return self.translator.gettext(message)
-        else:
+        if plural_message is None or count is None:
             return self.translator.gettext(message)
+        else:
+            return self.translator.ngettext(message, plural_message, count)
 
     def format_date(self, date, gmt_offset=0, relative=True, shorter=False,
                     full_format=False):

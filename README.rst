@@ -195,7 +195,7 @@ Following is a step-by-step guide to implement localization in any Cyclone appli
     you'll need an extra script to pre-process the files.
 
     Here's what you can use as ``fix.py``::
-        
+
         #!/usr/bin/env python
         # coding: utf-8
         # fix.py
@@ -219,7 +219,7 @@ Following is a step-by-step guide to implement localization in any Cyclone appli
     Then, call ``xgettext`` to generate the PO translatable file::
 
         cat foobar.tac template/index.html | python fix.py | \
-            xgettext --language=Python --keyword=_:1,2 -d foobar
+            xgettext --language=Python --from-code=utf-8 --keyword=_:1,2 -d foobar
 
     This will create a file named ``foobar.po``, which needs to be
     translated, then compiled into an MO file::

@@ -58,7 +58,7 @@ class AuthHandler(BaseHandler, cyclone.auth.GoogleMixin):
             self.get_authenticated_user(self._on_auth)
             return
         self.authenticate_redirect()
-    
+
     def _on_auth(self, user):
         if not user:
             raise cyclone.web.HTTPError(500, "Google auth failed")
